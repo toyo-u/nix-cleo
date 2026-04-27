@@ -19,8 +19,11 @@ in
         # Temporary workaround for Darwin/clang format-security build failure.
         NIX_CFLAGS_COMPILE =
           (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=format-security";
-        # Upstream test suite is currently flaky/failing on Darwin in this revision.
-        doCheck = false;
+      });
+      direnv = prev.direnv.overrideAttrs (old: {
+        # Upstream fish integration tests are currently being killed on Darwin
+        # in the pinned nixpkgs revision, so skip checks until that regresses less.
+        doCheck = if prev.stdenv.isDarwin then false else (old.doCheck or true);
       });
     })
   ];
