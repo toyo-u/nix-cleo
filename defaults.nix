@@ -40,4 +40,12 @@
       autocomplete = true;
     };
   };
+
+  tmux = {
+    enable = false;
+  };
+
+  ghostty = {
+    enable = false;
+  };
 }

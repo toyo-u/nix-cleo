@@ -2,6 +2,13 @@
 let
   # Android Studio and SDK Manager install the SDK here on macOS by convention.
   androidSdkRoot = "$HOME/Library/Android/sdk";
+  userHome = "/Users/${settings.username}";
+  homebrewTokenFile = "${userHome}/${settings.homebrewTokenFile}";
+  flakePath =
+    if lib.hasPrefix "~/" settings.flakePath
+    then "${userHome}/${lib.removePrefix "~/" settings.flakePath}"
+    else settings.flakePath;
+  flakeRef = "${flakePath}#${settings.hostname}";
   tmuxPluginNames = settings.tmux.plugins;
   hasTmuxPlugin = name: builtins.elem name tmuxPluginNames;
 in
@@ -116,9 +123,9 @@ in
 
     initContent = lib.mkOrder 1200 ''
       # Load the optional Brew GitHub token into interactive shells.
-      [[ -f "$HOME/${settings.homebrewTokenFile}" ]] && source "$HOME/${settings.homebrewTokenFile}"
+      [[ -f ${lib.escapeShellArg homebrewTokenFile} ]] && source ${lib.escapeShellArg homebrewTokenFile}
       # Convenience alias for rebuilding this nix-darwin configuration.
-      alias drs="sudo --preserve-env=HOMEBREW_GITHUB_API_TOKEN darwin-rebuild switch --flake ${settings.flakePath}#${settings.hostname}"
+      alias drs=${lib.escapeShellArg "sudo --preserve-env=HOMEBREW_GITHUB_API_TOKEN darwin-rebuild switch --flake ${flakeRef}"}
 
       # Repo-level flakes are the preferred path for mobile-app during adoption.
       # asdf remains available only as a compatibility fallback for repos that
