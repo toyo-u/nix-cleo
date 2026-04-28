@@ -59,6 +59,8 @@ Lix installer for new users because the official Nix installer does not include
 an automated macOS uninstaller. Use the implementation preferred by your team or
 machine policy.
 
+[Recommended: Lix Installer](https://lix.systems/install/#on-any-other-linuxmacos-system)
+
 Useful upstream references:
 
 - [`nix-darwin` GitHub repo](https://github.com/nix-darwin/nix-darwin)
