@@ -86,7 +86,6 @@ Useful upstream references:
 Put this repo at the path used by `settings.flakePath`:
 
 ```bash
-mkdir -p ~/.config
 git clone https://github.com/toyo-u/nix-cleo.git ~/.config/nix-darwin
 cd ~/.config/nix-darwin
 ```
