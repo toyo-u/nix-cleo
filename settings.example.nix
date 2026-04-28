@@ -10,7 +10,8 @@
   # `aarch64-darwin` for Apple Silicon, `x86_64-darwin` for Intel.
   system = "aarch64-darwin";
 
-  # Optional shell file under `$HOME` that exports `HOMEBREW_GITHUB_API_TOKEN`.
+  # Shell file under `$HOME` that exports `HOMEBREW_GITHUB_API_TOKEN`.
+  # Required before installing the `meetcleo` Homebrew package.
   homebrewTokenFile = ".config/secrets/homebrew.env";
   # Path to this repo on disk, used by the `drs` rebuild alias.
   flakePath = "~/.config/nix-darwin";
