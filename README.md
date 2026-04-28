@@ -91,6 +91,18 @@ Edit `settings.nix`:
 - set `system` to `aarch64-darwin` for Apple Silicon or `x86_64-darwin` for Intel
 - add any personal packages, Homebrew formulae, casks, shell preferences, or AWS profile
 
+Create a GitHub personal access token for Homebrew. Use a classic token from
+<https://github.com/settings/tokens> with the `repo` and `workflow` scopes.
+
+Create the local token file referenced by `settings.homebrewTokenFile`.
+Default path:
+
+```bash
+mkdir -p ~/.config/secrets
+printf 'export HOMEBREW_GITHUB_API_TOKEN=ghp_xxx\n' > ~/.config/secrets/homebrew.env
+chmod 600 ~/.config/secrets/homebrew.env
+```
+
 Check the config evaluates:
 
 ```bash
@@ -157,7 +169,9 @@ Commit `flake.lock` when the update is intentional.
 
 ## Homebrew Token Support
 
-If you need `HOMEBREW_GITHUB_API_TOKEN` for private taps or GitHub API limits,
+You need `HOMEBREW_GITHUB_API_TOKEN` for private taps or GitHub API limits,
+create a GitHub personal access token classic from
+<https://github.com/settings/tokens> with the `repo` and `workflow` scopes, then
 create the file referenced by `settings.homebrewTokenFile`.
 
 Default path:
